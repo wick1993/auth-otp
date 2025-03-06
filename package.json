@@ -1,6 +1,6 @@
 {
 	"name": "@wick1993/auth-otp",
-	"version": "0.0.1",
+	"version": "0.0.3",
 	"description": "A starter for Medusa plugins.",
 	"author": "Medusa (https://medusajs.com)",
 	"license": "MIT",

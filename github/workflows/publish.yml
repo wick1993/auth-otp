@@ -1,0 +1,36 @@
+name: Build and Publish Medusa Plugin
+
+on:
+  push:
+    branches:
+      - main  # Or any branch you want to trigger the workflow on
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Choose the node version that suits your project
+          registry-url: 'https://registry.npmjs.org/'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Build the Medusa plugin using npx (no need to install Medusa globally)
+      - name: Build Medusa Plugin
+        run: npx medusa plugin:build
+
+      # Publish to npm
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Use the npm token from secrets
